@@ -2,6 +2,7 @@ package golog
 
 import (
 	"fmt"
+	"os"
 )
 
 func (l *Logger) log(level LogLevel, msg string, args ...any) {
@@ -21,7 +22,7 @@ func (l *Logger) log(level LogLevel, msg string, args ...any) {
 
 	}
 	if mustShutdown {
-		fmt.Printf("shutdown now: %v\n", level)
+		os.Exit(1)
 	}
 
 }

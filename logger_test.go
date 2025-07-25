@@ -8,7 +8,11 @@ import (
 func TestLog(t *testing.T) {
 	logg := New(WithLevel(LevelTrace))
 	// logg.AddHandler(&Stderr)
-	logg.AddHandler(NewHandler(os.Stderr, LevelInfo, NewTextFormatter(WithTimePrecision(2))))
+	logg.AddHandler(NewHandler(os.Stderr, LevelInfo,
+		NewTextFormatter(
+			WithTimePrecision(3),
+			WithColor(),
+		)))
 	logg.Emergency("this is %v", "EMERGENCY")
 	logg.Fatal("this is %v", "FATAL")
 	logg.Alert("this is %v", "ALERT")

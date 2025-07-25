@@ -16,8 +16,8 @@ const (
 	LevelError
 	LevelCritical
 	LevelAlert
-	LevelFatal
 	LevelEmergency
+	LevelFatal
 )
 
 type Logger struct {

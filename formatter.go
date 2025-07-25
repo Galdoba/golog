@@ -123,6 +123,12 @@ func WithTimePrecision(tp int) TextFormatterOption {
 	}
 }
 
+func WithColor() TextFormatterOption {
+	return func(tf *TextFormatter) {
+		tf.color = colorizer.DefaultColorizer()
+	}
+}
+
 func (tf *TextFormatter) Format(level LogLevel, format string, args ...any) string {
 	timeBlock := timeStamp(tf.time)
 	timer := ""
@@ -180,7 +186,7 @@ func timeStamp(zeroes int) string {
 		if len(z) > 0 {
 			z = "." + z
 		}
-		return time.Now().Format(time.DateTime) + z
+		return time.Now().Format(time.DateTime + z)
 	}
 	return ""
 }
