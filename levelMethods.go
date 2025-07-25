@@ -16,12 +16,27 @@ func (l *Logger) Warn(msg string, args ...interface{}) {
 	l.log(LevelWarn, msg, args...)
 }
 
+func (l *Logger) Notice(msg string, args ...interface{}) {
+	l.log(LevelNotice, msg, args...)
+}
+
 func (l *Logger) Error(msg string, args ...interface{}) {
 	l.log(LevelError, msg, args...)
 }
 
+func (l *Logger) Critical(msg string, args ...interface{}) {
+	l.log(LevelCritical, msg, args...)
+}
+
+func (l *Logger) Alert(msg string, args ...interface{}) {
+	l.log(LevelAlert, msg, args...)
+}
+
 func (l *Logger) Fatal(msg string, args ...interface{}) {
 	l.log(LevelFatal, msg, args...)
+}
+func (l *Logger) Emergency(msg string, args ...interface{}) {
+	l.log(LevelEmergency, msg, args...)
 }
 
 var levelNames = map[LogLevel]string{
