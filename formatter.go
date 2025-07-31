@@ -88,28 +88,28 @@ func levelToString_5(level LogLevel) string {
 }
 
 type TextFormatter struct {
-	time      int
-	startTime time.Time
-	tick      int
-	level     int
+	time       int
+	startTime  time.Time
+	tick       int
+	level      int
 	levelBlock bool
-	dir       bool
-	file      bool
-	line      bool
-	color     *colorizer.Colorizer
+	dir        bool
+	file       bool
+	line       bool
+	color      *colorizer.Colorizer
 }
 
 func NewTextFormatter(options ...TextFormatterOption) *TextFormatter {
 	tf := TextFormatter{
-		time:      -1,
-		startTime: time.Time{},
-		tick:      -1,
-		level:     -1,
-		levelBlock true,
-		dir:       false,
-		file:      false,
-		line:      false,
-		color:     nil,
+		time:       -1,
+		startTime:  time.Time{},
+		tick:       -1,
+		level:      -1,
+		levelBlock: true,
+		dir:        false,
+		file:       false,
+		line:       false,
+		color:      nil,
 	}
 	for _, modify := range options {
 		modify(&tf)
@@ -136,6 +136,12 @@ func WithColor(enabled bool) TextFormatterOption {
 func WithTimerPrecision(tp int) TextFormatterOption {
 	return func(tf *TextFormatter) {
 		tf.tick = tp
+	}
+}
+
+func WithLevelTag(enabled bool) TextFormatterOption {
+	return func(tf *TextFormatter) {
+		tf.levelBlock = enabled
 	}
 }
 

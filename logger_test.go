@@ -11,7 +11,9 @@ func TestLog(t *testing.T) {
 	logg.AddHandler(NewHandler(os.Stderr, LevelInfo,
 		NewTextFormatter(
 			WithTimePrecision(3),
-			WithColor(),
+			WithTimerPrecision(3),
+			WithLevelTag(true),
+			WithColor(true),
 		)))
 	logg.Emergencyf("this is %v", "EMERGENCY")
 	logg.Alertf("this is %v", "ALERT")
