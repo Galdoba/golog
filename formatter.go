@@ -92,6 +92,7 @@ type TextFormatter struct {
 	startTime time.Time
 	tick      int
 	level     int
+	levelBlock bool
 	dir       bool
 	file      bool
 	line      bool
@@ -104,6 +105,7 @@ func NewTextFormatter(options ...TextFormatterOption) *TextFormatter {
 		startTime: time.Time{},
 		tick:      -1,
 		level:     -1,
+		levelBlock true,
 		dir:       false,
 		file:      false,
 		line:      false,
@@ -131,10 +133,22 @@ func WithColor(enabled bool) TextFormatterOption {
 	}
 }
 
+func WithTimerPrecision(tp int) TextFormatterOption {
+	return func(tf *TextFormatter) {
+		tf.tick = tp
+	}
+}
+
 func (tf *TextFormatter) Format(level LogLevel, format string, args ...any) string {
 	timeBlock := timeStamp(tf.time)
 	timer := ""
+	if tf.tick > 0 {
+		timer = fmt.Sprintf("%v", float64(time.Since(tf.startTime).Milliseconds())/1000)
+	}
 	lev := ""
+	if tf.levelBlock {
+		lev = levelToString(level)
+	}
 	blocks := []string{}
 	for _, block := range []string{timeBlock, timer, lev} {
 		if block != "" {
