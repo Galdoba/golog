@@ -123,9 +123,11 @@ func WithTimePrecision(tp int) TextFormatterOption {
 	}
 }
 
-func WithColor() TextFormatterOption {
+func WithColor(enabled bool) TextFormatterOption {
 	return func(tf *TextFormatter) {
-		tf.color = colorizer.DefaultColorizer()
+		if enabled {
+			tf.color = colorizer.DefaultColorizer()
+		}
 	}
 }
 
