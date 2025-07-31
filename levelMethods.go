@@ -59,3 +59,14 @@ var levelNames = map[LogLevel]string{
 func levelToString(l LogLevel) string {
 	return levelNames[l]
 }
+
+// ListLevels - convinience function list log levels and it's string representations.
+func ListLevels() ([]LogLevel, []string) {
+	lvls := []LogLevel{}
+	asString := []string{}
+	for l := LevelTrace; l <= LevelFatal; l++ {
+		lvls = append(lvls, l)
+		asString = append(asString, levelToString(l))
+	}
+	return lvls, asString
+}
