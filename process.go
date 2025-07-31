@@ -10,8 +10,8 @@ func (l *Logger) log(level LogLevel, msg string, args ...any) {
 	defer l.mu.Unlock()
 	mustShutdown := false
 	for _, handler := range l.handlers {
-		if level < l.level {
-			return
+		if level < handler.minLevel {
+			continue
 		}
 		if level >= LevelFatal {
 			mustShutdown = true
