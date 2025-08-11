@@ -70,3 +70,13 @@ func ListLevels() ([]LogLevel, []string) {
 	}
 	return lvls, asString
 }
+
+func StringToLevel(s string) LogLevel {
+	l := LevelInfo
+	for newL, str := range levelNames {
+		if str == s {
+			return newL
+		}
+	}
+	return l
+}
