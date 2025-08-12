@@ -1,7 +1,6 @@
 package golog
 
 import (
-	"fmt"
 	"os"
 )
 
@@ -17,8 +16,8 @@ func (l *Logger) log(level LogLevel, msg string, args ...any) {
 			mustShutdown = true
 		}
 
-		msg := handler.formatter.Format(level, msg, args...)
-		fmt.Fprintln(handler.writer, msg)
+		msg := handler.formatter.Format(level, msg, args...) + "\n"
+		handler.writer.Write([]byte(msg))
 
 	}
 	if mustShutdown {
