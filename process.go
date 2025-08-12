@@ -32,5 +32,4 @@ func (l *Logger) log(level LogLevel, msg string, args ...any) {
 	if mustShutdown {
 		os.Exit(1)
 	}
-
 }

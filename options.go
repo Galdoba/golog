@@ -8,6 +8,14 @@ func WithLevel(level LogLevel) LoggerOption {
 	}
 }
 
+func WithHandlers(handlers ...*MessageHandler) LoggerOption {
+	return func(l *Logger) {
+		for _, hand := range handlers {
+			l.AddHandler(hand)
+		}
+	}
+}
+
 // func WithOutput(writers ...io.Writer) LoggerOption {
 // 	return func(l *Logger) {
 // 		l.outputs = append(l.outputs, writers...)
